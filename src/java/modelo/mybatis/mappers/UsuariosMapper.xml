@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Usuarios">
+    <insert id="registrarUsuario" parameterType="map" statementType="CALLABLE">
+        {CALL sp_registrarUsuario(
+        #{nombre,jdbcType=VARCHAR,mode=IN},
+        #{apellidoPaterno,jdbcType=VARCHAR,mode=IN},
+        #{apellidoMaterno,jdbcType=VARCHAR,mode=IN},
+        #{usuario,jdbcType=VARCHAR,mode=IN},
+        #{password,jdbcType=VARCHAR,mode=IN},
+        #{idRol,jdbcType=INTEGER,mode=IN},
+        #{curp,jdbcType=VARCHAR,mode=IN})}
+    </insert>
+    
+    
+    <update id="actualizarUsuario" parameterType="map" statementType="CALLABLE">
+        {CALL sp_actualizarUsuario(
+        #{idUsuario,jdbcType=INTEGER,mode=IN},
+        #{nombre,jdbcType=VARCHAR,mode=IN},
+        #{apellidoPaterno,jdbcType=VARCHAR,mode=IN},
+        #{apellidoMaterno,jdbcType=VARCHAR,mode=IN},
+        #{usuario,jdbcType=VARCHAR,mode=IN},
+        #{idRol,jdbcType=INTEGER,mode=IN},
+        #{curp,jdbcType=VARCHAR,mode=IN})}
+    </update>
+    
+    <update id="eliminarUsuario" parameterType="map" statementType="CALLABLE">
+        {CALL sp_eliminarUsuario(
+        #{idUsuario,jdbcType=INTEGER,mode=IN})}
+    </update>
+
+    <update id="actualizarEstatus" parameterType="INTEGER">
+        {CALL sp_actualizarEstatusUsuario(
+        #{idUsuario,jdbcType=INTEGER,mode=IN})}
+    </update>
+
+    <select id="buscarUsuarioPorNombre" resultType="modelo.pojos.Usuarios" statementType="CALLABLE">
+        {CALL sp_buscarUsuarioPorNombre(#{nombre,jdbcType=VARCHAR,mode=IN})}
+    </select>
+    <select id="getAllUsers" resultType="modelo.pojos.Usuarios" statementType="CALLABLE">
+        {CALL sp_getAllUsuario()}
+    </select>
+    
+    <select id="getAllUsersActivo" resultType="modelo.pojos.Usuarios" statementType="CALLABLE">
+        {CALL sp_getUsuario()}
+    </select>
+    
+    <select id="usuarioId" resultType="map" statementType="CALLABLE">
+        {CALL sp_usuarioId(
+        #{usuario,jdbcType=VARCHAR,mode=IN})}
+    </select>
+    
+    <select id="getUsuarioById" resultType="modelo.pojos.Usuarios" statementType="CALLABLE">
+        {CALL sp_getUsuariosById(
+        #{nombre,jdbcType=VARCHAR,mode=IN})}
+    </select>
+    
+    
+</mapper>

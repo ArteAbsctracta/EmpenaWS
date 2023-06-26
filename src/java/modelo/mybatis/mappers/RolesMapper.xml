@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Roles">
+    
+    <insert id="registrarRol" parameterType="map" statementType="CALLABLE">
+        {CALL sp_registrarRol(
+        #{nombreRol,jdbcType=VARCHAR,mode=IN}, 
+        #{estatus,jdbcType=VARCHAR,mode=IN},
+        #{descripcion,jdbcType=VARCHAR,mode=IN})}
+    </insert>
+    
+    <update id="actualizarRol" parameterType="map" statementType="CALLABLE">
+        {CALL sp_actualizarRol(
+        #{idRol,jdbcType=INTEGER,mode=IN}, 
+        #{nombreRol,jdbcType=VARCHAR,mode=IN}, 
+        #{descripcion,jdbcType=VARCHAR,mode=IN})}
+    </update>
+    
+    <update id="eliminarRol" parameterType="map" statementType="CALLABLE">
+        {CALL sp_eliminarRol(
+        #{idRol,jdbcType=INTEGER,mode=IN})}
+    </update>
+
+    <update id="actualizarEstatus" parameterType="map" statementType="CALLABLE">
+        {CALL sp_actualizarEstatusRol(
+        #{idRol,jdbcType=INTEGER,mode=IN})}
+    </update>
+    
+         <select id="buscarRol" resultType="modelo.pojos.Roles" statementType="CALLABLE">
+        {CALL sp_buscarRol(
+        #{nombre,jdbcType=VARCHAR,mode=IN})}
+    </select>
+    <select id="getAllRol" resultType="modelo.pojos.Roles" statementType="CALLABLE">
+        {CALL sp_getAllRol()}
+    </select>
+    
+    <select id="getRolById" resultType="modelo.pojos.Roles" statementType="CALLABLE">
+        {CALL sp_getRolById(
+        #{nombre,jdbcType=VARCHAR,mode=IN})}
+    </select>
+    
+    <select id="getAllRolActivo" resultType="modelo.pojos.Roles" statementType="CALLABLE">
+        {CALL sp_getAllRolActivo()}
+    </select>
+    
+    <select id="rolId" resultType="modelo.pojos.Roles" statementType="CALLABLE">
+        {CALL sp_getRolById(
+        #{nombre,jdbcType=VARCHAR,mode=IN})}
+    </select>
+    
+</mapper>

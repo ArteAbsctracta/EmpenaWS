@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Ventas">
+    
+    <insert id="registrarVentas" parameterType="map" statementType="CALLABLE">
+        {CALL sp_sp_registrarVenta(
+        #{subTotal,jdbcType=VARCHAR,mode=IN},
+        #{ivaVenta,jdbcType=VARCHAR,mode=IN},
+        #{totalVenta,jdbcType=VARCHAR,mode=IN},
+        #{idContrato,jdbcType=INTEGER,mode=IN},
+        #{estatusVenta,jdbcType=VARCHAR,mode=IN},
+        #{idCliente,jdbcType=INTEGER,mode=IN},
+        #{idCreador,jdbcType=INTEGER,mode=IN},
+        #{fechaCreacion,jdbcType=VARCHAR,mode=IN},
+        #{totalArticulos,jdbcType=VARCHAR,mode=IN},
+        #{fechaCancelacion,jdbcType=VARCHAR,mode=IN},
+        #{idUsuaurio,jdbcType=INTEGER,mode=IN},
+        #{tipoVenta,jdbcType=VARCHAR,mode=IN})}
+    </insert>    
+    <update id="actualizarVentas" parameterType="map" statementType="CALLABLE">
+        {CALL sp_actualizarVentas(
+        #{idVenta,jdbcType=INTEGER,mode=IN},
+        #{subTotal,jdbcType=VARCHAR,mode=IN},
+        #{ivaVenta,jdbcType=VARCHAR,mode=IN},
+        #{totalVenta,jdbcType=VARCHAR,mode=IN},
+        #{idContrato,jdbcType=INTEGER,mode=IN},
+        #{estatusVenta,jdbcType=VARCHAR,mode=IN},
+        #{idCliente,jdbcType=INTEGER,mode=IN},
+        #{idCreador,jdbcType=INTEGER,mode=IN},
+        #{fechaCreacion,jdbcType=VARCHAR,mode=IN},
+        #{totalArticulos,jdbcType=VARCHAR,mode=IN},
+        #{fechaCancelacion,jdbcType=VARCHAR,mode=IN},
+        #{idUsuaurio,jdbcType=INTEGER,mode=IN},
+        #{tipoVenta,jdbcType=VARCHAR,mode=IN})}
+    </update>
+    
+    <update id="eliminarVentas" parameterType="map" statementType="CALLABLE">
+        {CALL sp_eliminarVenta(
+        #{idVenta,jdbcType=INTEGER,mode=IN})}
+    </update>
+    
+    <update id="actualizarEstatus" parameterType="map" statementType="CALLABLE">
+        {CALL sp_actualizarEstatusVenta(
+        #{idVenta,jdbcType=INTEGER,mode=IN})}
+    </update>
+    
+    <select id="buscarVentaByid" resultType="modelo.pojos.VentasRemates" statementType="CALLABLE">
+        {CALL sp_buscarVentaByid(#{idContrato,jdbcType=INTEGER,mode=IN})}
+    </select>
+    
+    <select id="getAllVentas" resultType="modelo.pojos.VentasRemates" statementType="CALLABLE">
+        {CALL sp_getAllVentas()}
+    </select>
+    
+    
+    
+    
+</mapper>
