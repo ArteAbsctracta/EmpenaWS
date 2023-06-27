@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="Ventas">
     
     <insert id="registrarVentas" parameterType="map" statementType="CALLABLE">
-        {CALL sp_sp_registrarVenta(
+        {CALL sp_registrarVenta(
         #{subTotal,jdbcType=VARCHAR,mode=IN},
         #{ivaVenta,jdbcType=VARCHAR,mode=IN},
         #{totalVenta,jdbcType=VARCHAR,mode=IN},
@@ -55,7 +55,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         {CALL sp_getAllVentas()}
     </select>
     
+    <select id="getAllVentasActivo" resultType="modelo.pojos.VentasRemates" statementType="CALLABLE">
+        {CALL sp_getVentas()}
+    </select>
     
     
-    
-</mapper>
+  </mapper>  

@@ -24,6 +24,7 @@ public class AppliacationConfig extends Application {
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(servicios.ClientesWS.class);
         resources.add(servicios.CorsFilter.class);
+        resources.add(servicios.DetalleVentasWS.class);
         resources.add(servicios.RolesWS.class);
         resources.add(servicios.SesionWS.class);
         resources.add(servicios.UsuariosWs.class);

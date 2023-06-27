@@ -22,6 +22,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import modelo.mybatis.MyBatisUtil;
 import modelo.pojos.Respuesta;
+import modelo.pojos.Usuarios;
 import modelo.pojos.VentasRemates;
 
 import org.apache.ibatis.session.SqlSession;
@@ -31,7 +32,6 @@ import utils.JavaUtils;
  *
  * @author afs30
  */
-
 @Path("Ventas")
 public class VentasRematesWS {
     
@@ -94,10 +94,10 @@ public class VentasRematesWS {
         return respuesta.build();
     }
     
-     @POST
+    @POST
     @Path("actualizarVentas/{idVenta}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response actualizarUsuario(
+    public Response actualizarVentas(
             @PathParam("idventa") Integer idVenta,
             @FormParam("subTotal") String subTotal,
             @FormParam("ivaVenta") String ivaVenta,
@@ -148,7 +148,7 @@ public class VentasRematesWS {
     @DELETE
     @Path("eliminarVenta/{idVenta}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response eliminarUsuario(
+    public Response eliminarVentas(
             @PathParam("idVenta") Integer idVenta
     ) {
         Response.ResponseBuilder respuesta = null;
@@ -172,7 +172,7 @@ public class VentasRematesWS {
         return respuesta.build();
     }
     
-        @POST
+    @POST
     @Path("actualizarEstatus/{idVentas}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response actualizarEstatusVenta(
@@ -200,6 +200,53 @@ public class VentasRematesWS {
     }
     
     @GET
+    @Path("getAllVentas")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllVentas() {
+        Response.ResponseBuilder respuesta = null;
+        SqlSession conn = MyBatisUtil.getSession();
+
+        try {
+            List<VentasRemates> list = conn.selectList("Ventas.getAllVentas");
+            respuesta = Response.ok(parser.toJson(list));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            respuesta = Response
+                    .status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity(new Respuesta("Error consultando las ventas."));
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return respuesta.build();
+    }
+    
+    
+    @GET
+    @Path("getAllVentasActivo")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllVentasActivo() {
+        Response.ResponseBuilder respuesta = null;
+        SqlSession conn = MyBatisUtil.getSession();
+
+        try {
+            List<VentasRemates> list = conn.selectList("Ventas.getAllVentasActivo");
+            respuesta = Response.ok(parser.toJson(list));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            respuesta = Response
+                    .status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity(new Respuesta("Error consultando los usuarios."));
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return respuesta.build();
+    }
+    
+    @GET
     @Path("buscarVentas/{idContrato}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response buscarVentaByid(@PathParam("idContrato") String idContrato) {
@@ -219,3 +266,4 @@ public class VentasRematesWS {
         return respuesta.build();
     }
 }
+
