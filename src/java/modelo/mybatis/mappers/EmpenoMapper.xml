@@ -7,4 +7,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="getAllEmpenos" resultType="modelo.pojos.Empeño" statementType="CALLABLE">
         {CALL sp_getAllEmpenos()}
     </select>
+    <insert id="registrarEmpeno" parameterType="map" statementType="CALLABLE">
+        {CALL sp_registrarEmpeño(
+        #{idCliente,jdbcType=INTEGER,mode=IN},
+        #{fechaCreacion,jdbcType=DATE,mode=IN},
+        #{observaciones,jdbcType=VARCHAR,mode=IN},
+        #{idUsuario,jdbcType=INTEGER,mode=IN},
+        #{contratoActual,jdbcType=VARCHAR,mode=IN},
+        #{fechaActualizacion,jdbcType=DATE,mode=IN},
+        #{interesPorcentaje,jdbcType=INTEGER,mode=IN},
+        #{almacenajePorcentaje,jdbcType=VARCHAR,mode=IN},
+        #{numPeriodos,jdbcType=INTEGER,mode=IN},
+        #{diasPeriodos,jdbcType=INTEGER,mode=IN},
+        #{ivaEmpeño,jdbcType=DOUBLE,mode=IN},
+        #{tasaCormecializacion,jdbcType=DOUBLE,mode=IN})}
+    </insert>
 </mapper>  

@@ -7,4 +7,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="getAllContratos" resultType="modelo.pojos.Contratos" statementType="CALLABLE">
         {CALL sp_getAllContratos()}
     </select>
+    <insert id="registrarContrato" parameterType="map" statementType="CALLABLE">
+        {CALL sp_registrarContrato(
+        #{idEmpeño, jdbcType=INTEGER, mode=IN},
+        #{fechaCreacion, jdbcType=DATE, mode=IN},
+        #{fechaActualizacion, jdbcType=DATE, mode=IN},
+        #{fechaLimite, jdbcType=DATE, mode=IN},
+        #{fechaComercializar, jdbcType=DATE, mode=IN},
+        #{importePrestamo, jdbcType=VARCHAR, mode=IN},
+        #{estatusContrato, jdbcType=VARCHAR, mode=IN},
+        #{contratoAnterior, jdbcType=VARCHAR, mode=IN},
+        #{fechaComercializacion, jdbcType=DATE, mode=IN},
+        #{fechaCancelacion, jdbcType=DATE, mode=IN},
+        #{idUsuario, jdbcType=INTEGER, mode=IN},
+        #{observaciones, jdbcType=VARCHAR, mode=IN},
+        #{idRefrendo, jdbcType=INTEGER, mode=IN},
+        #{idFiniquito, jdbcType=INTEGER, mode=IN},
+        #{idEspera, jdbcType=INTEGER, mode=IN},
+        #{contratoSiguiente, jdbcType=VARCHAR, mode=IN})}
+    </insert>
 </mapper>  

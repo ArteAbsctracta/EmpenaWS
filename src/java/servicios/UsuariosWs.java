@@ -275,7 +275,7 @@ public class UsuariosWs {
         ResponseBuilder respuesta = null;
         SqlSession conn = MyBatisUtil.getSession();
         try {
-            List<Usuarios> list = conn.selectList("Usuarios.buscarUsuarioPorNombre", nombre);
+            Usuarios list = conn.selectOne("Usuarios.buscarUsuarioPorNombre", nombre);
             respuesta = Response.ok(parser.toJson(list));
         } catch (Exception ex) {
             ex.printStackTrace();
