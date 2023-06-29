@@ -10,7 +10,7 @@ import java.util.Date;
  * @author afs30
  */
 public class Empeño {
-    private Integer numeroEmpeño;
+    private Integer idEmpeño;
     private Integer idCliente;
     private Date fechaCreacion;
     private String observaciones;
@@ -23,12 +23,13 @@ public class Empeño {
     private int diasPeriodo;
     private double ivaEmpeño;
     private double tasaComercializacion;
+    private String nombreUsuario;
 
     public Empeño() {
     }
 
-    public Empeño(Integer numeroEmpeño, Integer idCliente, Date fechaCreacion, String observaciones, Integer idUsuario, String contratoActual, Date fechaActualizacion, double interesPorcentaje, double almacenajePorcentaje, int numPeriodos, int diasPeriodo, double ivaEmpeño, double tasaComercializacion) {
-        this.numeroEmpeño = numeroEmpeño;
+    public Empeño(Integer idEmpeño, Integer idCliente, Date fechaCreacion, String observaciones, Integer idUsuario, String contratoActual, Date fechaActualizacion, double interesPorcentaje, double almacenajePorcentaje, int numPeriodos, int diasPeriodo, double ivaEmpeño, double tasaComercializacion, String nombreUsuario) {
+        this.idEmpeño = idEmpeño;
         this.idCliente = idCliente;
         this.fechaCreacion = fechaCreacion;
         this.observaciones = observaciones;
@@ -41,14 +42,23 @@ public class Empeño {
         this.diasPeriodo = diasPeriodo;
         this.ivaEmpeño = ivaEmpeño;
         this.tasaComercializacion = tasaComercializacion;
+        this.nombreUsuario = nombreUsuario;
     }
 
-    public Integer getNumeroEmpeño() {
-        return numeroEmpeño;
+    public Integer getIdEmpeño() {
+        return idEmpeño;
     }
 
-    public void setNumeroEmpeño(Integer numeroEmpeño) {
-        this.numeroEmpeño = numeroEmpeño;
+    public void setIdEmpeño(Integer idEmpeño) {
+        this.idEmpeño = idEmpeño;
+    }
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
     }
 
     public Integer getIdCliente() {

@@ -12,7 +12,7 @@ package modelo.pojos;
 public class Comercializacion {
     private Integer idComercializacion;
     private String fechaCreacion;
-    private String creador;
+    private String idUsuario;
     private String fechaInicioBusqueda;
     private String fechaFinalBusqueda;
     private String observaciones;
@@ -24,7 +24,7 @@ public class Comercializacion {
     public Comercializacion(Integer idComercializacion, String fechaCreacion, String creador, String fechaInicioBusqueda, String fechaFinalBusqueda, String observaciones, String tipoComercializacion) {
         this.idComercializacion = idComercializacion;
         this.fechaCreacion = fechaCreacion;
-        this.creador = creador;
+        this.idUsuario = creador;
         this.fechaInicioBusqueda = fechaInicioBusqueda;
         this.fechaFinalBusqueda = fechaFinalBusqueda;
         this.observaciones = observaciones;
@@ -48,11 +48,11 @@ public class Comercializacion {
     }
 
     public String getCreador() {
-        return creador;
+        return idUsuario;
     }
 
     public void setCreador(String creador) {
-        this.creador = creador;
+        this.idUsuario = creador;
     }
 
     public String getFechaInicioBusqueda() {

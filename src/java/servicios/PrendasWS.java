@@ -5,10 +5,55 @@
  */
 package servicios;
 
+import com.google.gson.Gson;
+import java.util.List;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+import modelo.mybatis.MyBatisUtil;
+import org.apache.ibatis.session.SqlSession;
+import modelo.pojos.Prendas;
+import modelo.pojos.Respuesta;
+
 /**
  *
  * @author afs30
  */
+@Path("Prendas")
 public class PrendasWS {
+        @Context
+    private UriInfo context;
+    private Gson parser = new Gson();
+
+    public PrendasWS() {
+    }
+    
+    @GET
+    @Path("getAllPrendas")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllContratos() {
+        Response.ResponseBuilder respuesta = null;
+        SqlSession conn = MyBatisUtil.getSession();
+
+        try {
+            List<Prendas> list = conn.selectList("Prendas.getAllPrendas");
+            respuesta = Response.ok(parser.toJson(list));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            respuesta = Response
+                    .status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity(new Respuesta("Error consultando los prendas."));
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return respuesta.build();
+    }
+    
     
 }

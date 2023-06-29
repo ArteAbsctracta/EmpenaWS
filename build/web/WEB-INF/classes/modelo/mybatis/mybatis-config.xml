@@ -12,8 +12,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
                 <property name="url" value="jdbc:sqlserver://127.0.0.1:1433;instanceName=MSSQLSERVER;db=peliculas"/>-->
                 <property name="driver" value="com.mysql.jdbc.Driver"/>
                 <property name="url" value="jdbc:mysql://localhost:3306/proin"/>
-                <property name="username" value="root"/>
-                <property name="password" value="andy123"/>
+                <property name="username" value="JoaquinGA"/>
+                <property name="password" value="123456789"/>
                 <property name="poolMaximumActiveConnections" value="50"/>
             </dataSource>
         </environment>
@@ -26,6 +26,14 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
       <mapper resource="modelo/mybatis/mappers/RolesMapper.xml"/>
       <mapper resource="modelo/mybatis/mappers/SesionMapper.xml"/>
       <mapper resource="modelo/mybatis/mappers/ClienteMapper.xml"/>
+<<<<<<< Updated upstream
+=======
+      <mapper resource="modelo/mybatis/mappers/VentasMapper.xml"/>
+      <mapper resource="modelo/mybatis/mappers/ContratosMapper.xml"/>
+      <mapper resource="modelo/mybatis/mappers/PrendasMapper.xml"/>
+      <mapper resource="modelo/mybatis/mappers/EmpenoMapper.xml"/>
+      <mapper resource="modelo/mybatis/mappers/ComercializacionMapper.xml"/>
+>>>>>>> Stashed changes
       <!-- <mapper resource="modelo/mybatis/mappers/IngresoMapper.xml"/> -->
     </mappers>
 </configuration>

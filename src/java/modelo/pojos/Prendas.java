@@ -21,8 +21,8 @@ public class Prendas {
     private String subcategoria;
     private String descripcionPrenda;
     private boolean esMetal;
-    private double peso;
-    private double kilataje;
+    private String peso;
+    private String kilataje;
     private double prestamo;
     private String modeloPrenda;
     private double precioComercializacion;
@@ -33,11 +33,12 @@ public class Prendas {
     private Date fechaComercializacion;
     private Date fechaVenta;
     private Integer idUsuario;
+    private String nombreUsuario;
 
     public Prendas() {
     }
 
-    public Prendas(Integer idPrenda, Integer idEmpeño, String categoria, Integer numPiezas, String serie, String modelo, String subcategoria, String descripcionPrenda, boolean esMetal, double peso, double kilataje, double prestamo, String modeloPrenda, double precioComercializacion, double precioVenta, String estatusPrenda, String comercializacionAsociada, Date fechaCreacion, Date fechaComercializacion, Date fechaVenta, Integer idUsuario) {
+    public Prendas(Integer idPrenda, Integer idEmpeño, String categoria, Integer numPiezas, String serie, String modelo, String subcategoria, String descripcionPrenda, boolean esMetal, String peso, String kilataje, double prestamo, String modeloPrenda, double precioComercializacion, double precioVenta, String estatusPrenda, String comercializacionAsociada, Date fechaCreacion, Date fechaComercializacion, Date fechaVenta, Integer idUsuario, String nombreUsuario) {
         this.idPrenda = idPrenda;
         this.idEmpeño = idEmpeño;
         this.categoria = categoria;
@@ -59,7 +60,18 @@ public class Prendas {
         this.fechaComercializacion = fechaComercializacion;
         this.fechaVenta = fechaVenta;
         this.idUsuario = idUsuario;
+        this.nombreUsuario = nombreUsuario;
     }
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
+
+    
 
     public Integer getIdPrenda() {
         return idPrenda;
@@ -133,19 +145,19 @@ public class Prendas {
         this.esMetal = esMetal;
     }
 
-    public double getPeso() {
+    public String getPeso() {
         return peso;
     }
 
-    public void setPeso(double peso) {
+    public void setPeso(String peso) {
         this.peso = peso;
     }
 
-    public double getKilataje() {
+    public String getKilataje() {
         return kilataje;
     }
 
-    public void setKilataje(double kilataje) {
+    public void setKilataje(String kilataje) {
         this.kilataje = kilataje;
     }
 
