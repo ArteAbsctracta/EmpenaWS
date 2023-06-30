@@ -11,7 +11,9 @@ import java.util.List;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -188,6 +190,62 @@ public class PrendasWS {
             respuesta = Response
                     .status(Response.Status.INTERNAL_SERVER_ERROR)
                     .entity(new Respuesta("No se pudo actualizar la Prenda"));
+        } finally {
+            conn.close();
+        }
+        return respuesta.build();
+    }
+    
+    
+    
+    @GET
+    @Path("eliminarPrenda/{idPrenda}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response eliminarUsuario(
+            @PathParam("idPrenda") Integer idPrenda
+    ) {
+        Response.ResponseBuilder respuesta = null;
+        SqlSession conn = MyBatisUtil.getSession();
+
+        try {
+            HashMap<String, Object> param = new HashMap<String, Object>();
+            param.put("idPrenda", idPrenda);
+
+            conn.update("Prendas.eliminarPrenda", param);
+            conn.commit();
+            respuesta = Response.ok(new Respuesta("Prenda eliminada correctamente..."));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            respuesta = Response
+                    .status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity(new Respuesta("No se pudo eliminar la Prenda"));
+        } finally {
+            conn.close();
+        }
+        return respuesta.build();
+    }
+    
+    @GET
+    @Path("actualizarEstatus/{idPrenda}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response actualizarEstatusUsuario(
+            @PathParam("idPrenda") Integer idPrenda) {
+
+        Response.ResponseBuilder respuesta = null;
+        SqlSession conn = MyBatisUtil.getSession();
+
+        try {
+            HashMap<String, Object> param = new HashMap<String, Object>();
+            param.put("idPrenda", idPrenda);
+
+            conn.update("Prendas.actualizarEstatus", param);
+            conn.commit();
+            respuesta = Response.ok(new Respuesta("Estatus actualizado correctamente..."));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            respuesta = Response
+                    .status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity(new Respuesta("No se pudo actualizar el estado"));
         } finally {
             conn.close();
         }

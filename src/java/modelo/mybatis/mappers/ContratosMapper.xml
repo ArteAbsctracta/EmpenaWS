@@ -41,4 +41,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         #{idRefrendo, jdbcType=INTEGER, mode=IN},
         #{idFiniquito, jdbcType=INTEGER, mode=IN})}
     </update>
+    
+    <update id="eliminarContrato" parameterType="map" statementType="CALLABLE">
+        {CALL sp_eliminarContrato(
+        #{idContrato,jdbcType=INTEGER,mode=IN})}
+    </update>
+
+    <update id="actualizarEstatus" parameterType="map" statementType="CALLABLE">
+        {CALL sp_actualizarEstatusContrato(
+        #{idContrato,jdbcType=INTEGER,mode=IN})}
+    </update>
 </mapper>  

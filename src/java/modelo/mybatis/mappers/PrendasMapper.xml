@@ -54,4 +54,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         #{idUsuario, jdbcType=INTEGER, mode=IN}
         )}
     </update>
+    
+    <update id="eliminarPrenda" parameterType="map" statementType="CALLABLE">
+        {CALL sp_eliminarPrenda(
+        #{idPrenda,jdbcType=INTEGER,mode=IN})}
+    </update>
+
+    <update id="actualizarEstatus" parameterType="map" statementType="CALLABLE">
+        {CALL sp_actualizarEstatusPrenda(
+        #{idPrenda,jdbcType=INTEGER,mode=IN})}
+    </update>
 </mapper>  

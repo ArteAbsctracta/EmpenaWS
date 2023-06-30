@@ -12,6 +12,7 @@ import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -163,6 +164,61 @@ public class ContratoWs {
             respuesta = Response
                     .status(Response.Status.INTERNAL_SERVER_ERROR)
                     .entity(new Respuesta("No se pudo actualizar el Contrato"));
+        } finally {
+            conn.close();
+        }
+        return respuesta.build();
+    }
+    
+    
+    @GET
+    @Path("eliminarContrato/{idContrato}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response eliminarContrato(
+            @PathParam("idContrato") Integer idContrato
+    ) {
+        Response.ResponseBuilder respuesta = null;
+        SqlSession conn = MyBatisUtil.getSession();
+
+        try {
+            HashMap<String, Object> param = new HashMap<String, Object>();
+            param.put("idContrato", idContrato);
+
+            conn.update("Contratos.eliminarContrato", param);
+            conn.commit();
+            respuesta = Response.ok(new Respuesta("Contrato eliminada correctamente..."));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            respuesta = Response
+                    .status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity(new Respuesta("No se pudo eliminar el Contrato"));
+        } finally {
+            conn.close();
+        }
+        return respuesta.build();
+    }
+    
+    @GET
+    @Path("actualizarEstatus/{idContrato}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response actualizarEstatusContrato(
+            @PathParam("idContrato") Integer idContrato) {
+
+        Response.ResponseBuilder respuesta = null;
+        SqlSession conn = MyBatisUtil.getSession();
+
+        try {
+            HashMap<String, Object> param = new HashMap<String, Object>();
+            param.put("idContrato", idContrato);
+
+            conn.update("Contratos.actualizarEstatus", param);
+            conn.commit();
+            respuesta = Response.ok(new Respuesta("Estatus actualizado correctamente..."));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            respuesta = Response
+                    .status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity(new Respuesta("No se pudo actualizar el estado"));
         } finally {
             conn.close();
         }
