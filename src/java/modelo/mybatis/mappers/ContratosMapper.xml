@@ -9,7 +9,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     <insert id="registrarContrato" parameterType="map" statementType="CALLABLE">
         {CALL sp_registrarContrato(
-        #{idEmpeño, jdbcType=INTEGER, mode=IN},
         #{fechaCreacion, jdbcType=DATE, mode=IN},
         #{fechaActualizacion, jdbcType=DATE, mode=IN},
         #{fechaLimite, jdbcType=DATE, mode=IN},
@@ -26,4 +25,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         #{idEspera, jdbcType=INTEGER, mode=IN},
         #{contratoSiguiente, jdbcType=VARCHAR, mode=IN})}
     </insert>
+    <update id="actualizarContrato" parameterType="map" statementType="CALLABLE">
+        {CALL sp_actualizarContrato(
+        #{idEmpeño, jdbcType=INTEGER, mode=IN},
+        #{idContrato, jdbcType=INTEGER, mode=IN},
+        #{fechaActualizacion, jdbcType=VARCHAR, mode=IN},
+        #{fechaLimite, jdbcType=VARCHAR, mode=IN},
+        #{fechaComercializar, jdbcType=VARCHAR, mode=IN},
+        #{importePrestamo, jdbcType=VARCHAR, mode=IN},
+        #{contratoAnterior, jdbcType=VARCHAR, mode=IN},
+        #{fechaComercializacion, jdbcType=VARCHAR, mode=IN},
+        #{fechaCancelacion, jdbcType=DATE, mode=IN},
+        #{idUsuario, jdbcType=INTEGER, mode=IN},
+        #{observaciones, jdbcType=VARCHAR, mode=IN},
+        #{idRefrendo, jdbcType=INTEGER, mode=IN},
+        #{idFiniquito, jdbcType=INTEGER, mode=IN})}
+    </update>
 </mapper>  

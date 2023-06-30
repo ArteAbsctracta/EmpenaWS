@@ -108,4 +108,57 @@ public class EmpeñoWs {
         }
         return respuesta.build();
     }
+    
+    
+    
+    @POST
+    @Path("actualizarEmpenos")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response actualizarEmpeno(
+            @FormParam("idEmpeño") Integer idEmpeño,
+            @FormParam("idCliente") Integer idCliente,
+            @FormParam("fechaCreacion") String fechaCreacion,
+            @FormParam("observaciones") String observaciones,
+            @FormParam("idUsuario") Integer idUsuario,
+            @FormParam("contratoActual") String contratoActual,
+            @FormParam("fechaActualizacion") String FechaActualizacion,
+            @FormParam("interesPorcentaje") String interesPorcentaje,
+            @FormParam("almacenajePorcentaje") String almacenajePorcentaje,
+            @FormParam("numPeriodos") Integer numPeriodos,
+            @FormParam("diasPeriodos") Integer diasPeriodo,
+            @FormParam("ivaEmpeño") Double ivaEmpeño,
+            @FormParam("tasaCormecializacion") Double tasaCormecializacion) {
+
+        Response.ResponseBuilder respuesta = null;
+        SqlSession conn = MyBatisUtil.getSession();
+        
+        try {
+            HashMap<String, Object> param = new HashMap<String, Object>();
+            param.put("idEmpeño", idEmpeño);
+            param.put("idCliente", idCliente);
+            param.put("fechaCreacion", fechaCreacion);
+            param.put("observaciones", observaciones);
+            param.put("idUsuario", idUsuario);
+            param.put("contratoActual", contratoActual);
+            param.put("fechaActualizacion", FechaActualizacion);
+            param.put("interesPorcentaje", interesPorcentaje);
+            param.put("almacenajePorcentaje", almacenajePorcentaje);
+            param.put("numPeriodos", numPeriodos);
+            param.put("diasPeriodos", diasPeriodo);
+            param.put("ivaEmpeño", ivaEmpeño);
+            param.put("tasaCormecializacion", tasaCormecializacion);
+            System.out.println(param);
+            conn.insert("Empenos.actualizarEmpeno", param);
+            conn.commit();
+            respuesta = Response.ok(new Respuesta("Empeño actualizado correctamente..."));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            respuesta = Response
+                    .status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity(new Respuesta("No se pudo actualizar el Empeño"));
+        } finally { 
+            conn.close();
+        }
+        return respuesta.build();
+    }
 }

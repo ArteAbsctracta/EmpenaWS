@@ -82,7 +82,7 @@ public class ContratoWs {
 
         Response.ResponseBuilder respuesta = null;
         SqlSession conn = MyBatisUtil.getSession();
-           System.out.println(fechaComercializacion);
+        System.out.println(fechaComercializacion);
         try {
             HashMap<String, Object> param = new HashMap<String, Object>();
             param.put("idEmpeño", idEmpeño);
@@ -101,9 +101,9 @@ public class ContratoWs {
             param.put("idRefrendo", idRefrendo);
             param.put("idFiniquito", idFiniquito);
             param.put("idEspera", idEspera);
-            
+
             System.out.println(param);
- 
+
             conn.insert("Contratos.registrarContrato", param);
             conn.commit();
             respuesta = Response.ok(new Respuesta("Contrato registrado correctamente..."));
@@ -112,6 +112,57 @@ public class ContratoWs {
             respuesta = Response
                     .status(Response.Status.INTERNAL_SERVER_ERROR)
                     .entity(new Respuesta("No se pudo registrar el Contrato"));
+        } finally {
+            conn.close();
+        }
+        return respuesta.build();
+    }
+
+    @POST
+    @Path("actualizarContrato")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response actualizarContrato(
+            @FormParam("idContrato") Integer idContrato,
+            @FormParam("fechaActualizacion") String fechaActualizacion,
+            @FormParam("fechaLimite") String fechaLimite,
+            @FormParam("fechaComercializar") String fechaComercializar,
+            @FormParam("importePrestamo") String importePrestamo,
+            @FormParam("contratoAnterior") String contratoAnterior,
+            @FormParam("fechaComercializacion") String fechaComercializacion,
+            @FormParam("fechaCancelacion") String fechaCancelacion,
+            @FormParam("idUsuario") Integer idUsuario,
+            @FormParam("observaciones") String observaciones,
+            @FormParam("idRefrendo") Integer idRefrendo,
+            @FormParam("idFiniquito") Integer idFiniquito) {
+
+        Response.ResponseBuilder respuesta = null;
+        SqlSession conn = MyBatisUtil.getSession();
+        System.out.println(fechaComercializacion);
+        try {
+            HashMap<String, Object> param = new HashMap<String, Object>();
+            param.put("idContrato", idContrato);
+            param.put("fechaActualizacion", fechaActualizacion);
+            param.put("fechaLimite", fechaLimite);
+            param.put("fechaComercializar", fechaComercializar);
+            param.put("importePrestamo", importePrestamo);
+            param.put("contratoAnterior", contratoAnterior);
+            param.put("fechaComercializacion", fechaComercializacion);
+            param.put("fechaCancelacion", fechaCancelacion);
+            param.put("idUsuario", idUsuario);
+            param.put("observaciones", observaciones);
+            param.put("idRefrendo", idRefrendo);
+            param.put("idFiniquito", idFiniquito);
+
+            System.out.println(param);
+
+            conn.insert("Contratos.actualizarContrato", param);
+            conn.commit();
+            respuesta = Response.ok(new Respuesta("Contrato actualizado correctamente..."));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            respuesta = Response
+                    .status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity(new Respuesta("No se pudo actualizar el Contrato"));
         } finally {
             conn.close();
         }

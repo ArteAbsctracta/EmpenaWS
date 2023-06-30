@@ -31,4 +31,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         #{idUsuario, jdbcType=INTEGER, mode=IN}
         )}
     </insert>
+    <update id="actualizarPrendas" parameterType="map" statementType="CALLABLE">
+        {CALL sp_actualizarPrendas(
+        #{idPrenda, jdbcType=INTEGER, mode=IN},
+        #{idEmpeño, jdbcType=INTEGER, mode=IN},
+        #{categoria, jdbcType=VARCHAR, mode=IN},
+        #{numPiezas, jdbcType=INTEGER, mode=IN},
+        #{serie, jdbcType=VARCHAR, mode=IN},
+        #{modelo, jdbcType=VARCHAR, mode=IN},
+        #{subCategoria, jdbcType=VARCHAR, mode=IN},
+        #{descripcionPrenda, jdbcType=VARCHAR, mode=IN},
+        #{metal, jdbcType=VARCHAR, mode=IN},
+        #{peso, jdbcType=VARCHAR, mode=IN},
+        #{kilataje, jdbcType=VARCHAR, mode=IN},
+        #{prestamo, jdbcType=VARCHAR, mode=IN},
+        #{modeloPrenda, jdbcType=VARCHAR, mode=IN},
+        #{precioComercializacion, jdbcType=VARCHAR, mode=IN},
+        #{precioVenta, jdbcType=VARCHAR, mode=IN},
+        #{comercializacionAsociada, jdbcType=VARCHAR, mode=IN},
+        #{fechaComercializacion, jdbcType=VARCHAR, mode=IN},
+        #{fechaVenta, jdbcType=VARCHAR, mode=IN},
+        #{idUsuario, jdbcType=INTEGER, mode=IN}
+        )}
+    </update>
 </mapper>  
